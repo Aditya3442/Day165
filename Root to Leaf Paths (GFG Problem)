@@ -1,0 +1,21 @@
+class Solution {
+    public static void recur(Node root , ArrayList<ArrayList<Integer>> list , ArrayList<Integer> l){
+        if(root == null)
+           return;
+        l.add(root.data);
+        if(root.left == null && root.right == null){
+            list.add(new ArrayList(l));
+        }
+        recur(root.left , list , l);
+        recur(root.right , list , l);
+        l.remove(l.size() - 1);
+        
+    }
+    public static ArrayList<ArrayList<Integer>> Paths(Node root) {
+        // code here
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        ArrayList<Integer> l = new ArrayList<>();
+        recur(root , list , l); 
+        return list;
+    }
+}
