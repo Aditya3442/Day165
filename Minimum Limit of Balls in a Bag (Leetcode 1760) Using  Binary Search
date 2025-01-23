@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isPossible(int[] nums , int mid , int maxOperations){
+        int operations = 0;
+        for(int num : nums){
+            operations += num / mid;
+            if(num % mid == 0)
+              operations--;
+        }
+        return operations <= maxOperations;
+    }
+    public int minimumSize(int[] nums, int maxOperations) {
+        int l = 1;
+        int h = Integer.MIN_VALUE;
+        for(int i = 0 ; i  < nums.length ; i++){
+            h = Math.max(h , nums[i]);
+        }
+        int result = h;
+        while(l <= h){
+            int mid = l + (h - l) / 2;
+            if(isPossible(nums , mid , maxOperations)){
+                result = mid;
+                h = mid - 1;
+            }
+            else
+                l = mid + 1;
+        }
+        return result;
+    }
+}
