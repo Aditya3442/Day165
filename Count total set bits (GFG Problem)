@@ -1,0 +1,23 @@
+class Solution{
+    public static int findx(int n){
+        int x = 0;
+        while((1 << x) <= n){
+            x++;
+        }
+        x--;
+        return x;
+    }
+    public static int solve(int n){
+        if(n == 0)
+          return 0;
+        int x = findx(n);
+        int a = (1 << x - 1) * x;
+        int b = n - (1 << x) + 1;
+        return (a + b + solve(n - (1 << x)));
+    }
+    //Function to return sum of count of set bits in the integers from 1 to n.
+    public static int countSetBits(int n){
+        // Your code here
+        return solve(n);
+    }
+}
